@@ -1,6 +1,5 @@
 # REAL-TIME-CHATAPP
 
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
