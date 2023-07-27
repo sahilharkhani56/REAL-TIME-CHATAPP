@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://w7.pngwing.com/pngs/273/74/png-transparent-online-chat-livechat-chat-room-baycreative-inc-google-icon-blue-text-logo.png" alt="Logo" width="80" height="80">
+    <img src="[https://w7.pngwing.com/pngs/273/74/png-transparent-online-chat-livechat-chat-room-baycreative-inc-google-icon-blue-text-logo.png](https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.freepik.com%2Fpremium-vector%2Fchat-app-logo-design-template-can-be-used-icon-chat-application-logo_605910-1724.jpg&tbnid=25jxPiuAReBFxM&vet=12ahUKEwiWr8jIqK-AAxURgmMGHRaVAnMQMygBegUIARD8AQ..i&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fchat-app-logo-design-template-can-be-used-icon-chat-application-logo_36949664.htm&docid=54izMwscxM6aaM&w=626&h=454&q=chat%20app%20logo&ved=2ahUKEwiWr8jIqK-AAxURgmMGHRaVAnMQMygBegUIARD8AQ)" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Chat App</h3>
