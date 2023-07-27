@@ -72,26 +72,26 @@ To get a local copy up and running follow these simple example steps.
 
 
 Fork, then download or clone the repo.
-bash
+```bash
 git clone https://github.com/sahilharkhani56/REAL-TIME-CHATAPP.git
-
+```
 
 For the *back-end*, install the dependencies (using package.json) once via the terminal.
-bash
+```bash
 cd server
 npm install (dependencies)
-
+```
 
 If you want to run the *back-end, go to *backtend folder via the terminal.
-bash
+```bash
 npm run start
-
+```
 
 If you want to run the *front-end, go to *frontend folder via the terminal.
-bash
+```bash
 cd client
 npm run dev
-
+```
 
 Now you are ready to run the server and frontend.
 
