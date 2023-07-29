@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import{ Avatar} from "@mui/material";
 import '../styles/ChatView.css'
 const chat_view = (props) => {
+  // console.log(socket);
   const navigateTo=useNavigate()
   const [currentChat,setCurrentChat]=useState()
   useEffect(()=>{
@@ -17,6 +18,7 @@ const chat_view = (props) => {
   function userLogout(){
     localStorage.removeItem('token')
     navigateTo('/')
+    window.location.reload();
   }
   function stringToColor1(string) {
     let hash = 0;
@@ -67,7 +69,7 @@ const chat_view = (props) => {
           </button>
         </div>
       </div>
-      {currentChat?.length===0?(<Welcome/>):(<Chat_container data={props.data} currentChat={currentChat}/>)}
+      {currentChat?.length===0?(<Welcome/>):(<Chat_container data={props.data} currentChat={currentChat} socket={props.socket}/>)}
       {/* {console.log(}  */}
 
     </div>

@@ -3,14 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/Username.module.css";
 import { Toaster, toast } from "react-hot-toast";
 import { Formik, useFormik } from "formik";
-import avatar from "../assets/avatar.jpg";
-import { usernameValidate } from "../helper/validate";
-// import { useAuthStore } from "../store/store";
-import useFetch from "../hooks/fetchhooks";
 import {login_verifyPassword} from '../helper/helper'
 
-export default function Username() {
-  // const setUsername = useAuthStore((state) => state.setUsername);
+export default function Login(props) {
+
   const navigateTo = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -18,11 +14,6 @@ export default function Username() {
       password: "",
     },
     onSubmit: async (values) => {
-      console.log(values);
-      // setUsername(values.username);
-      // console.log(username);
-      // navigateTo("/password");
-      // const [{isLoading,apiData,serverError}]=useFetch(`/user/${values.username}`)
     let loginPromise=login_verifyPassword({username:values.username,password:values.password})
       toast.promise(loginPromise,{
         loading:"Checking...!",

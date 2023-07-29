@@ -68,7 +68,7 @@ const sidebar = (props) => {
         </div>
         
         <div className="text-center  h-[calc(100%-114px)] ">
-          <Contect_list func={pull_data}/>
+          <Contect_list func={pull_data} socket={props.socket}/>
         </div>
       </div>
     </>

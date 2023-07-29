@@ -7,22 +7,27 @@ import{ Avatar} from "@mui/material";
 import "../styles/Contect_list.css";
 const Contect_list = (props) => {
   const [dataa, setData] = useState([]);
+  const [activeUser,setActiveUser]=useState();
   const [currentSelected, setCurrentSelected] = useState([]);
   const url = "http://localhost:8080/api/allUsers";
   const [{ isLoading, apiData, serverError }] = useFetch();
+  const fetchInfo = async () => {
+    if (url && apiData?._id) {
+      var contects = await axios.get(`${url}/${apiData?._id}`);
+      setData(contects.data);
+    }
+  };
+
+
   useEffect(() => {
-    const fetchInfo = async () => {
-      if (url && apiData?._id) {
-        var contects = await axios.get(`${url}/${apiData?._id}`);
-        // console.log(apiData?._id);
-        // const d = await data.json();
-        setData(contects.data);
-      }
-    };
     fetchInfo();
     // console.log(dataa);
-  }, [apiData]);
+    props.socket?.on('activeUserResponse', (data) => {
+      setActiveUser(data);
+    })
+  }, [apiData,props.socket]);
 
+  
   var itemList = [];
   dataa.map((dataObj, index) => {
     itemList.push(dataObj);

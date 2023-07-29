@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { Formik, useFormik } from "formik";
 import useFetch from "../hooks/fetchhooks";
-import { addMessage } from "../helper/helper";
+// import { addMessage } from "../helper/helper";
 import avatar from "../assets/avatar.jpg";
 import "./ChatContainer.scss";
 import { Avatar } from "@mui/material";
@@ -14,8 +14,13 @@ export const Chat_container = (props) => {
   const [{ isLoading, apiData, serverError }] = useFetch();
   const [chatmessage, setMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
+  const [checker , setChecker] = useState(false);
+  const messagesEndRef = useRef(null)
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setChecker(!checker);
     if (chatmessage.length > 0) {
       setMessage("");
     }
@@ -24,22 +29,31 @@ export const Chat_container = (props) => {
       to: props?.data._id,
       message: chatmessage,
     });
+    // console.log(props?.data._id);
+    props.socket?.emit('newMessage',   props?.data._id);
   };
 
   useEffect(() => {
-    async function check() {
+    async function getAllMsg() {
       const response = await axios.post(getMessageUrl, {
         from: apiData?._id,
         to: props?.data._id,
       });
       setAllMessages(response.data);
-      // console.log(allMessages);
-      // console.log("from"+apiData?.username);
-      // console.log("to"+props?.data.username);
     }
-    check();
-  }, [apiData, props?.data]);
-  const css = {};
+    // console.log(props.socket);
+    props.socket?.on("messageResponse",(data)=>{
+      getAllMsg();
+    })
+    
+    getAllMsg()
+  }, [apiData, props?.data,props.socket,setAllMessages,setMessage,checker,chatmessage]);
+  
+  useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      console.log(setAllMessages);
+  },[allMessages])
+ 
 
   function stringToColor1(string) {
     let hash = 0;
@@ -57,95 +71,61 @@ export const Chat_container = (props) => {
   return (
     <>
       <div
-        className="text-3xl mt-16  h-[calc(100%-128px)] messages"
-        style={{ backgroundColor: "#E4DCCF" }}
-      >
+        className="text-3xl mt-16 mb-64 h-[calc(100%-200px)] messages" style={{ backgroundColor: "#E4DCCF" }} >
         <ul>
           {allMessages.map((dataObj, index) => {
             return (
-              <div key={index}>
-                {dataObj.fromSelf === true ? (
-                  <li key={index} className="replies">
-                    {/* <img src={apiData?.profile || avatar} alt="image"></img> */}
-                    <div>
-                      <Avatar
-                        sx={
-                          apiData?.username !== undefined
-                            ? {
+              <div key={index} > {dataObj.fromSelf === true ? (
+                  <li key={index} className="replies" ><div>
+                      <Avatar sx={ apiData?.username !== undefined ? {
                                 bgcolor: stringToColor1(apiData?.profile),
                                 width: 30,
                                 height: 30,
-                              }
-                            : {
+                              }: {
                                 bgcolor: stringToColor1("G"),
                                 width: 30,
                                 height: 30,
-                              }
-                        }
-                        src={apiData?.profile}
-                        size="sm"
-                      >
-                        {apiData?.username !== undefined
-                          ? apiData?.username.split(" ").length > 1
+                              }} src={apiData?.profile} size="sm">
+                          {apiData?.username !== undefined ? apiData?.username.split(" ").length > 1
                             ? apiData?.username.split(" ")[0][0].toUpperCase() +
                               apiData?.username.split(" ")[1][0].toUpperCase()
-                            : apiData?.username.split(" ")[0][0].toUpperCase()
-                          : "G"}
+                            : apiData?.username.split(" ")[0][0].toUpperCase() : "G"}
                       </Avatar>
                     </div>
                     <p
-                      className="relative  py-2 text-lg shadow rounded-xl  mb-1 "
-                      style={{ backgroundColor: "#c8e6c9" }}
-                    >
+                      className="relative  py-2 text-lg shadow rounded-xl  mb-1 " style={{ backgroundColor: "#c8e6c9" }} >
                       {dataObj.message}
-                    <h6 className="timeReceive pt-1">{dataObj.createdAt}</h6>
-
+                    <span className="timeReceive pt-1">{dataObj.createdAt}</span>
                     </p>
                   </li>
+                  
                 ) : (
-                  <li key={index} className="sent">
-                    <div>
-                      {/* <img src={props?.data.profile || avatar}></img> */}
-                      <Avatar
-                        sx={
-                          props?.data.username !== undefined
-                            ? {
+                  <li key={index} className="sent"> <div>
+                  <Avatar  sx={  props?.data.username !== undefined  ? {
                                 bgcolor: stringToColor1(props?.data.username),
                                 width: 30,
                                 height: 30,
-                              }
-                            : {
+                              }  : {
                                 bgcolor: stringToColor1("G"),
                                 width: 30,
                                 height: 30,
-                              }
-                        }
-                        src={props?.data.profile}
-                        size="sm"
-                      >
-                        {props?.data.username !== undefined
-                          ? props?.data.username.split(" ").length > 1
-                            ? props?.data.username
-                                .split(" ")[0][0]
-                                .toUpperCase() +
-                              props?.data.username
-                                .split(" ")[1][0]
-                                .toUpperCase()
-                            : props?.data.username
-                                .split(" ")[0][0]
-                                .toUpperCase()
-                          : "G"}
+                              }  }  src={props?.data.profile}  size="sm"  >
+                              {props?.data.username !== undefined  ? props?.data.username.split(" ").length > 1
+                            ? props?.data.username.split(" ")[0][0].toUpperCase() +
+                              props?.data.username.split(" ")[1][0].toUpperCase()
+                            : props?.data.username.split(" ")[0][0].toUpperCase(): "G"}
                       </Avatar>
                     </div>
                     <p className="relative  text-lg bg-white pt-2   shadow rounded-xl">
                       {dataObj.message}
-                    <h6 className="timeReceive pt-1">{dataObj.createdAt}</h6>
+                    <span className="timeReceive pt-1">{dataObj.createdAt}</span>
                     </p>
                   </li>
                 )}
               </div>
             );
           })}
+          <div ref={messagesEndRef}/>
         </ul>
       </div>
       <div className="bg-gray-10 float-right w-[calc(75%-30px)] absolute bottom-4 right-5 h-16 ">
