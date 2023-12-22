@@ -3,9 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://img.freepik.com/premium-vector/chat-app-logo-design-template_18099-1546.jpg?w=2000" alt="Logo" width="100" height="100">
-  </a>
+  
 
   <h3 align="center">Chat App</h3>
 
