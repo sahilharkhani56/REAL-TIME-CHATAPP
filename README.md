@@ -95,7 +95,7 @@ npm run dev
 Now you are ready to run the server and frontend.
 
 <br />
-![image](https://github.com/sahilharkhani56/REAL-TIME-CHATAPP/assets/101865283/e2512dc8-b1a4-4dc3-9a62-2b02aed88b97)
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -120,4 +120,4 @@ Project Link:(https://github.com/sahilharkhani56/REAL-TIME-CHATAPP.git)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: images/screenshot.PNG
+![image](https://github.com/sahilharkhani56/REAL-TIME-CHATAPP/assets/101865283/e2512dc8-b1a4-4dc3-9a62-2b02aed88b97)
