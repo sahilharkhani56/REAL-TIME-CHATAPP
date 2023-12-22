@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     }
     activeUsers[userId].push(socket.id);
     socketIdToUserId[socket.id] = userId;
-    console.log(activeUsers);
+    // console.log(activeUsers);
     io.emit("activeUserResponse", Object.keys(activeUsers));
   });
 
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         delete activeUsers[userId];
       }
     }
-    console.log(activeUsers);
+    // console.log(activeUsers);
     console.log(" A user disconnected");
   });
 });

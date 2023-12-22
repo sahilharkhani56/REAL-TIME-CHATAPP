@@ -37,7 +37,6 @@ export async function register(req, res) {
       existUserPromise,
       existEmailPromise,
     ]);
-
     if (user) {
       throw new Error("Please Use Unique Username");
     }

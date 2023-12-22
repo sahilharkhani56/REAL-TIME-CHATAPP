@@ -29,24 +29,12 @@ const router=createBrowserRouter([
   {
     path:'/chat',
     element:<AuthrizerUser><Chat /></AuthrizerUser>
-    // element:<Chat></Chat>
   }
 ])
 function App() {
-  // const [response, setResponse] = useState("");
-
-  // useEffect(() => {
-  //   const socket = socketIOClient(ENDPOINT);
-  //   socket.on("FromAPI", data => {
-  //     setResponse(data);
-  //   });
-  //   return () => socket.disconnect();
-  // }, []);
-
-
   return (
     <>
-<main>
+    <main>
       <RouterProvider router={router}></RouterProvider>
     </main>
     </>
